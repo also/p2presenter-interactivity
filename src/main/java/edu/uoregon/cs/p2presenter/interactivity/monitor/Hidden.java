@@ -1,5 +1,3 @@
-/* $Id$ */
-
 package edu.uoregon.cs.p2presenter.interactivity.monitor;
 
 import java.lang.annotation.ElementType;

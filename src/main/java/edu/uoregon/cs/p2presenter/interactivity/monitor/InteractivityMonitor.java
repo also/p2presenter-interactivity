@@ -1,5 +1,3 @@
-/* $Id$ */
-
 package edu.uoregon.cs.p2presenter.interactivity.monitor;
 
 import java.lang.reflect.Method;
@@ -18,22 +16,22 @@ import edu.uoregon.cs.p2presenter.interactivity.InteractivityStateListener;
  */
 public class InteractivityMonitor<T extends InteractivityModel> implements InvocationListener<BeforeMethodInvocationEvent<T>>, InteractivityStateListener<T> {
 	private ArrayList<InteractivityEvent<T>> interactivityEvents = new ArrayList<InteractivityEvent<T>>();
-	
+
 	private InteractivityStateListener<T> view;
-	
+
 	private SerializedStateEvent<T> currentStateEvent;
-	
+
 	/** Optional listener for interactivity events */
 	private InteractivtyMonitorEventListener listener;
-	
+
 	private boolean active = true;
-	
+
 	public InteractivityMonitor(T model, InteractivityStateListener<T> view) {
 		this.view = view;
-		
+
 		model.setStateListener(this);
 	}
-	
+
 	public void setListener(InteractivtyMonitorEventListener listener) {
 		this.listener = listener;
 	}
@@ -57,23 +55,23 @@ public class InteractivityMonitor<T extends InteractivityModel> implements Invoc
 			result = new BeforeMethodInvocationEvent<T>(currentStateEvent, target, method, args);
 			addEvent(result);
 		}
-		
+
 		return result;
 	}
-	
+
 	public boolean isActive() {
 		return active;
 	}
-	
+
 	public void setActive(boolean active) {
 		// TODO an interactivity event should be logged
 		this.active = active;
 	}
-	
+
 	public List<InteractivityEvent<T>> getEvents() {
 		return Collections.unmodifiableList(interactivityEvents);
 	}
-	
+
 	private void addEvent(InteractivityEvent<T> event) {
 		interactivityEvents.add(event);
 		if (listener != null) {

@@ -1,5 +1,3 @@
-/* $Id$ */
-
 package edu.uoregon.cs.p2presenter.interactivity.host;
 
 import org.ry1.json.JsonObject;
@@ -25,16 +23,16 @@ public class JoinInteractivityRequestHandler implements RequestHandler {
 	public OutgoingResponseMessage handleRequest(IncomingRequestMessage request) throws Exception {
 		Object model = interactivityController.onConnect();
 		request.getConnection().addConnectionLifecycleListener(new InteractivityConnectionListener(model));
-		
+
 		PostalDJavaConnection dJavaConnection = PostalDJavaConnection.getPostalDJavaConnection(request.getConnection(), proxyCacheUri, true);
-		
+
 		OutgoingResponseMessage response = new OutgoingResponseMessage(request);
-		
+
 		JsonObject responseObject = new JsonObject();
 		responseObject.set("participantModelProxyId", dJavaConnection.getObjectDescriptor(model).getId());
-		
+
 		response.setContent(responseObject.toString());
-		
+
 		return response;
 	}
 
@@ -43,7 +41,7 @@ public class JoinInteractivityRequestHandler implements RequestHandler {
 	 */
 	private class InteractivityConnectionListener implements ConnectionLifecycleListener {
 		private Object model;
-		
+
 		private InteractivityConnectionListener(Object model) {
 			this.model = model;
 		}

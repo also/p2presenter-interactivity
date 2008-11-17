@@ -29,11 +29,11 @@ public class SerializedStateEvent<T extends InteractivityModel> implements Inter
 			throw new RuntimeException(ex);
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public T getState() {
 		ByteArrayInputStream bytes = new ByteArrayInputStream(serializedState);
-		
+
 		try {
 			ObjectInputStream in = new ObjectInputStream(bytes);
 			return (T) in.readObject();
@@ -46,7 +46,7 @@ public class SerializedStateEvent<T extends InteractivityModel> implements Inter
 			throw new RuntimeException(ex);
 		}
 	}
-	
+
 	@Override
 	public String toString() {
 		return "State changed (occupies " + serializedState.length + " bytes)";
@@ -55,5 +55,5 @@ public class SerializedStateEvent<T extends InteractivityModel> implements Inter
 	public SerializedStateEvent<T> getCurrentStateEvent() {
 		return this;
 	}
-	
+
 }

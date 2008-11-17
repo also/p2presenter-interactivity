@@ -1,5 +1,3 @@
-/* $Id$ */
-
 package edu.uoregon.cs.p2presenter.interactivity.monitor;
 
 import edu.uoregon.cs.p2presenter.interactivity.InteractivityModel;
@@ -10,20 +8,20 @@ import edu.uoregon.cs.p2presenter.interactivity.InteractivityModel;
  */
 public class AfterMethodInvocationEvent<T extends InteractivityModel> implements InteractivityEvent<T> {
 	private SerializedStateEvent<T> currentStateEvent;
-	
+
 	private BeforeMethodInvocationEvent beforeMethodInvocationEvent;
-	
+
 	public AfterMethodInvocationEvent(SerializedStateEvent<T> currentStateEvent, BeforeMethodInvocationEvent<T> beforeMethodInvocationEvent, Object result) {
 		this.currentStateEvent = currentStateEvent;
 		this.beforeMethodInvocationEvent = beforeMethodInvocationEvent;
 		beforeMethodInvocationEvent.setAfterMethodInvocationEvent(this);
 	}
-	
+
 	@Override
 	public String toString() {
 		return "After " + beforeMethodInvocationEvent.toStringPart();
 	}
-	
+
 	public SerializedStateEvent<T> getCurrentStateEvent() {
 		return currentStateEvent;
 	}

@@ -30,9 +30,9 @@ public class DemoClient {
 		try {
 			PostalClient postalClient = new PostalClient();
 			LocalConnection connection = postalClient.connect(host, 9000);
-			
+
 			InteractivityParticipantClient client = new InteractivityParticipantClient(connection, new Integer(interactivityIdString));
-			
+
 			// TODO
 			frame.setContentPane(client.getView());
 			frame.setSize(new Dimension(300, 200));
